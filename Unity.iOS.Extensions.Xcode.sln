@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unity.iOS.Extensions.Xcode", "Unity.iOS.Extensions.Xcode\Unity.iOS.Extensions.Xcode.csproj", "{097FA9EF-F68D-4B46-ABAD-1A121115850D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.iOS.Extensions.XCode.Test", "Unity.iOS.Extensions.XCode.Test\Unity.iOS.Extensions.XCode.Test.csproj", "{34BF4F1A-0C5B-423B-A5DA-40046AE38CB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{097FA9EF-F68D-4B46-ABAD-1A121115850D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{097FA9EF-F68D-4B46-ABAD-1A121115850D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{097FA9EF-F68D-4B46-ABAD-1A121115850D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{097FA9EF-F68D-4B46-ABAD-1A121115850D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34BF4F1A-0C5B-423B-A5DA-40046AE38CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34BF4F1A-0C5B-423B-A5DA-40046AE38CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34BF4F1A-0C5B-423B-A5DA-40046AE38CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34BF4F1A-0C5B-423B-A5DA-40046AE38CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B949D136-F7D0-4167-81CC-166BEC10435D}
+	EndGlobalSection
+EndGlobal
