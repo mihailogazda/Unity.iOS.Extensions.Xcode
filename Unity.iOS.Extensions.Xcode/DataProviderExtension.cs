@@ -25,6 +25,17 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
     {
     }
 
+    public class ProjectProperty
+    {
+        public string Key;
+        public string Value;
+
+        public override string ToString()
+        {
+            return string.Format("{0} == {1}", Key, Value);
+        }
+    }
+
 
     public static class DataProviderExtension
     {
@@ -79,9 +90,6 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
         internal static PBXNativeTargetData GetBuildTargetData(this PBXProject proj)
         {
             var targetID = proj.GetUnityProjectGUID();
-
-
-
             foreach (var target in proj.GetProjectDataInternal().nativeTargets.GetEntries())
             {
                 if (target.Key.Equals(targetID))
@@ -125,11 +133,30 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
             return fileInfos;
         }
 
+        public static List<ProjectProperty> GetBuildProperties(this PBXProject proj)
+        {
+            var toReturn = new List<ProjectProperty>();
+            var tmp = proj.buildConfigLists[proj.GetConfigListForTarget(proj.GetUnityProjectGUID())].buildConfigs;
 
+            foreach (var guid in tmp)
+            {
+                var configList = proj.buildConfigs[guid];
+                foreach (var entry in configList.GetEntries())
+                {
+                    BuildConfigEntryData value = entry.Value;
+                    if (value != null)
+                    {
+                        ProjectProperty prop = new ProjectProperty();
+                        prop.Key = entry.Key;
+                        prop.Value = entry.Value.val[0];
 
+                        toReturn.Add(prop);
+                    }
+                }
+            }
 
-
-
+            return toReturn;
+        }
 
     }
 }

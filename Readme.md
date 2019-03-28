@@ -4,4 +4,13 @@ For our internal tooling we need more capabilities from the Unity's XCODE API an
 
 This project does just that. 
 
+## Usage 
+Additional methods are listed bellow, and are rather self explanatory.
+
+* PBXProject::GetUsedFrameworks()
+* PBXProject::GetFilesIncludedInBuild()
+* PBXProject::GetBuildProperties()
+
+
+## Notes
 Fork from: https://bitbucket.org/Unity-Technologies/xcodeapi

@@ -8,15 +8,15 @@ namespace Unity.iOS.Extensions.XCode.Test
     {
         static void Main(string[] args)
         {
-            string path = @"C:\P\Streams\bcup_dev_a\Client\tools\build_validator\exec\HSS.xcodeproj\project.pbxproj";
+            string path = args[0];
 
             PBXProject proj = new PBXProject();
             proj.ReadFromFile(path);
 
             var frameworks = proj.GetUsedFrameworks();
             var filesInBuild = proj.GetFilesIncludedInBuild();
-
-
+            var buildProperties = proj.GetBuildProperties();
+            //var buildCapabilities = null;
 
             Console.ReadKey();
         }
