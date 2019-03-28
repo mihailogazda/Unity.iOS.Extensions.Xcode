@@ -9,4 +9,18 @@
     <ProjectReference Include="..\Unity.iOS.Extensions.Xcode\Unity.iOS.Extensions.Xcode.csproj" />
   </ItemGroup>
 
+  	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <OutputPath>..\bin\</OutputPath>
+	  <DefineConstants>TRACE;RELEASE;NETCOREAPP2_0;UNITY_XCODE_API_BUILD</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <OutputPath>..\bin\</OutputPath>
+	  <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0;UNITY_XCODE_API_BUILD</DefineConstants>	  
+	</PropertyGroup> 
+	
 </Project>

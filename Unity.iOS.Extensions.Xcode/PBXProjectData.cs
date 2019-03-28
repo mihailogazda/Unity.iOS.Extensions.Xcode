@@ -714,10 +714,12 @@ namespace UnityEditor.iOS.Xcode.Custom
             return changed;
         }
 
-        public Dictionary<string, string> GetFileRefMapInternal()
+        public Dictionary<string, PBXFileReferenceData> GetFileRefMapInternal()
         {
-            return m_FileRefGuidToProjectPathMap;
+            return m_ProjectPathToFileRefMap;
         }
+
+
     }
 
 } // namespace UnityEditor.iOS.Xcode

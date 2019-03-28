@@ -13,8 +13,10 @@ namespace Unity.iOS.Extensions.XCode.Test
             PBXProject proj = new PBXProject();
             proj.ReadFromFile(path);
 
+            var frameworks = proj.GetUsedFrameworks();
+            var filesInBuild = proj.GetFilesIncludedInBuild();
 
-            var frameworks = proj.EXT_GetFrameworks();
+
 
             Console.ReadKey();
         }
