@@ -8,19 +8,23 @@ This project does just that.
 Additional methods are listed bellow, and are rather self explanatory.
 
 ~~~
-	//	Usage example
-	PBXProject proj = new PBXProject();
-	proj.ReadFromFile(path);
+//	Usage example
+PBXProject proj = new PBXProject();
+proj.ReadFromFile(path);
 
-	var frameworks = proj.GetUsedFrameworks();
-	var filesInBuild = proj.GetFilesIncludedInBuild();
-	var buildProperties = proj.GetBuildProperties();
-	var buildCapabilities = proj.GetBuildCapabilities();
+var frameworks = proj.GetUsedFrameworks();
+var filesInBuild = proj.GetFilesIncludedInBuild();
+var buildProperties = proj.GetBuildProperties();
+var buildCapabilities = proj.GetBuildCapabilities();
 ~~~
 
 To use the extension methods you need to import the namespace:
 
 `using UnityEditor.iOS.Xcode.Extensions;`
+
+## Releases
+Tested versions can be found here:
+https://github.com/mihailogazda/Unity.iOS.Extensions.Xcode/releases
 
 ## Notes
 Fork from: https://bitbucket.org/Unity-Technologies/xcodeapi
