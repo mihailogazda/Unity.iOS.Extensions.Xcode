@@ -10,7 +10,7 @@ Additional methods are listed bellow, and are rather self explanatory.
 * PBXProject::GetUsedFrameworks()
 * PBXProject::GetFilesIncludedInBuild()
 * PBXProject::GetBuildProperties()
-
+* PBXProject::GetBuildCapabilities()
 
 ## Notes
 Fork from: https://bitbucket.org/Unity-Technologies/xcodeapi
