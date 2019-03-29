@@ -82,8 +82,8 @@ namespace UnityEditor.iOS.Xcode.Custom.PBX
         internal virtual PropertyCommentChecker checker { get { return checkerData; } }
         internal virtual bool shouldCompact { get { return false; } }
 
-        public virtual void UpdateProps() {}      // Updates the props from cached variables
-        public virtual void UpdateVars() {}       // Updates the cached variables from underlying props
+        public virtual void UpdateProps() { }      // Updates the props from cached variables
+        public virtual void UpdateVars() { }       // Updates the cached variables from underlying props
     }
 
     internal class PBXBuildFileData : PBXObjectData
@@ -322,7 +322,7 @@ namespace UnityEditor.iOS.Xcode.Custom.PBX
     {
         private List<string> m_List = new List<string>();
 
-        public GUIDList() {}
+        public GUIDList() { }
         public GUIDList(List<string> data)
         {
             m_List = data;
@@ -331,11 +331,11 @@ namespace UnityEditor.iOS.Xcode.Custom.PBX
         public static implicit operator List<string>(GUIDList list) { return list.m_List; }
         public static implicit operator GUIDList(List<string> data) { return new GUIDList(data); }
 
-        public void AddGUID(string guid)        { m_List.Add(guid); }
-        public void RemoveGUID(string guid)     { m_List.RemoveAll(x => x == guid); }
-        public bool Contains(string guid)       { return m_List.Contains(guid); }
-        public int Count                        { get { return m_List.Count; } }
-        public void Clear()                     { m_List.Clear(); }
+        public void AddGUID(string guid) { m_List.Add(guid); }
+        public void RemoveGUID(string guid) { m_List.RemoveAll(x => x == guid); }
+        public bool Contains(string guid) { return m_List.Contains(guid); }
+        public int Count { get { return m_List.Count; } }
+        public void Clear() { m_List.Clear(); }
         IEnumerator<string> IEnumerable<string>.GetEnumerator() { return m_List.GetEnumerator(); }
         IEnumerator IEnumerable.GetEnumerator() { return m_List.GetEnumerator(); }
     }
@@ -946,23 +946,23 @@ namespace UnityEditor.iOS.Xcode.Custom.PBX
             // Enable the capabilities.
             foreach (var cap in capabilities)
             {
-               var attrs = m_Properties.Contains("attributes") ? m_Properties["attributes"].AsDict() : m_Properties.CreateDict("attributes");
-               var targAttr = attrs.Contains("TargetAttributes") ? attrs["TargetAttributes"].AsDict() : attrs.CreateDict("TargetAttributes");
-               var target = targAttr.Contains(cap.targetGuid) ? targAttr[cap.targetGuid].AsDict() : targAttr.CreateDict(cap.targetGuid);
-               var sysCap = target.Contains("SystemCapabilities") ? target["SystemCapabilities"].AsDict() : target.CreateDict("SystemCapabilities");
+                var attrs = m_Properties.Contains("attributes") ? m_Properties["attributes"].AsDict() : m_Properties.CreateDict("attributes");
+                var targAttr = attrs.Contains("TargetAttributes") ? attrs["TargetAttributes"].AsDict() : attrs.CreateDict("TargetAttributes");
+                var target = targAttr.Contains(cap.targetGuid) ? targAttr[cap.targetGuid].AsDict() : targAttr.CreateDict(cap.targetGuid);
+                var sysCap = target.Contains("SystemCapabilities") ? target["SystemCapabilities"].AsDict() : target.CreateDict("SystemCapabilities");
 
-               var capabilityId = cap.capability.id;
-               var currentCapability = sysCap.Contains(capabilityId) ? sysCap[capabilityId].AsDict() : sysCap.CreateDict(capabilityId);
-               currentCapability.SetString("enabled", "1");
+                var capabilityId = cap.capability.id;
+                var currentCapability = sysCap.Contains(capabilityId) ? sysCap[capabilityId].AsDict() : sysCap.CreateDict(capabilityId);
+                currentCapability.SetString("enabled", "1");
             }
 
             // Set the team id
             foreach (KeyValuePair<string, string> teamID in teamIDs)
             {
-               var attrs = m_Properties.Contains("attributes") ? m_Properties["attributes"].AsDict() : m_Properties.CreateDict("attributes");
-               var targAttr = attrs.Contains("TargetAttributes") ? attrs["TargetAttributes"].AsDict() : attrs.CreateDict("TargetAttributes");
-               var target = targAttr.Contains(teamID.Key) ? targAttr[teamID.Key].AsDict() : targAttr.CreateDict(teamID.Key);
-               target.SetString("DevelopmentTeam", teamID.Value);
+                var attrs = m_Properties.Contains("attributes") ? m_Properties["attributes"].AsDict() : m_Properties.CreateDict("attributes");
+                var targAttr = attrs.Contains("TargetAttributes") ? attrs["TargetAttributes"].AsDict() : attrs.CreateDict("TargetAttributes");
+                var target = targAttr.Contains(teamID.Key) ? targAttr[teamID.Key].AsDict() : targAttr.CreateDict(teamID.Key);
+                target.SetString("DevelopmentTeam", teamID.Value);
             }
         }
 
@@ -1004,18 +1004,27 @@ namespace UnityEditor.iOS.Xcode.Custom.PBX
                 if (el.Contains("TargetAttributes"))
                 {
                     var targetAttr = el["TargetAttributes"].AsDict();
-                    foreach (var attr in targetAttr.values)
-                    {
-                        if (attr.Key == "DevelopmentTeam")
-                        {
-                            teamIDs.Add(attr.Key, attr.Value.AsString());
-                        }
 
-                        if (attr.Key == "SystemCapabilities")
+                    foreach (var target in targetAttr.values)
+                    {
+                        foreach (var attr in target.Value.AsDict().values)
                         {
-                            var caps = el["SystemCapabilities"].AsDict();
-                            foreach (var cap in caps.values)
-                                capabilities.Add(new PBXCapabilityType.TargetCapabilityPair(attr.Key, PBXCapabilityType.StringToPBXCapabilityType(cap.Value.AsString())));
+                            if (attr.Key == "DevelopmentTeam")
+                            {
+                                teamIDs.Add(attr.Key, attr.Value.AsString());
+                            }
+
+                            if (attr.Key == "SystemCapabilities")
+                            {
+                                //var caps = el["SystemCapabilities"].AsDict();
+                                foreach (var cap in attr.Value.AsDict().values)
+                                {
+                                    var capab = PBXCapabilityType.StringToPBXCapabilityType(cap.Key);
+
+                                    capabilities.Add(new PBXCapabilityType.TargetCapabilityPair(attr.Key, capab));
+                                }
+
+                            }
                         }
                     }
                 }

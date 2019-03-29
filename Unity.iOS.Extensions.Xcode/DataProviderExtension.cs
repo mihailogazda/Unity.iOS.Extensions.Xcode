@@ -36,6 +36,19 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
         }
     }
 
+    public class ProjectCapability
+    {
+        public string Name;
+        public string FrameworkName;
+        public bool FrameworkRequired;
+        public bool EntitlementRequired;
+
+        public override string ToString()
+        {
+            return string.Format("{0} Framework: {1}", Name, string.IsNullOrEmpty(FrameworkName) ? "None" : FrameworkName);
+        }
+    }
+
 
     public static class DataProviderExtension
     {
@@ -156,6 +169,32 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
             }
 
             return toReturn;
+        }
+
+        public static List<ProjectCapability> GetBuildCapabilities(this PBXProject proj)
+        {
+            proj.GetProjectInternal().UpdateVars();
+            proj.GetProjectInternal().UpdateProps();
+            var capabilities = proj.GetProjectInternal().capabilities;
+
+            if (capabilities != null && capabilities.Count > 0)
+            {
+                List<ProjectCapability> caps = new List<ProjectCapability>();
+
+                foreach (var capability in capabilities)
+                {
+                    ProjectCapability cap = new ProjectCapability();
+                    cap.Name = capability.capability.id;
+                    cap.FrameworkName = capability.capability.framework;
+                    cap.FrameworkRequired = !capability.capability.optionalFramework;
+                    cap.EntitlementRequired = capability.capability.requiresEntitlements;
+                    caps.Add(cap);
+                }
+
+                return caps;
+            }
+
+            return null;
         }
 
     }

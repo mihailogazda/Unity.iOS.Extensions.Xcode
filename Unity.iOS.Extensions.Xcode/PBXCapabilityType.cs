@@ -15,12 +15,14 @@ namespace UnityEditor.iOS.Xcode.Custom
         public static readonly PBXCapabilityType BackgroundModes = new PBXCapabilityType ("com.apple.BackgroundModes", false);
         public static readonly PBXCapabilityType DataProtection = new PBXCapabilityType ("com.apple.DataProtection", true);
         public static readonly PBXCapabilityType GameCenter = new PBXCapabilityType ("com.apple.GameCenter", false, "GameKit.framework");
+        public static readonly PBXCapabilityType GameCenterIOS = new PBXCapabilityType("com.apple.GameCenter.iOS", false, "GameKit.framework");
         public static readonly PBXCapabilityType HealthKit = new PBXCapabilityType ("com.apple.HealthKit", true, "HealthKit.framework");
         public static readonly PBXCapabilityType HomeKit = new PBXCapabilityType ("com.apple.HomeKit", true, "HomeKit.framework");
         public static readonly PBXCapabilityType iCloud = new PBXCapabilityType("com.apple.iCloud", true, "CloudKit.framework", true);
         public static readonly PBXCapabilityType InAppPurchase = new PBXCapabilityType ("com.apple.InAppPurchase", false);
         public static readonly PBXCapabilityType InterAppAudio = new PBXCapabilityType ("com.apple.InterAppAudio", true, "AudioToolbox.framework");
         public static readonly PBXCapabilityType KeychainSharing = new PBXCapabilityType ("com.apple.KeychainSharing", true);
+        public static readonly PBXCapabilityType KeyChainEnabled = new PBXCapabilityType("com.apple.Keychain", true);
         public static readonly PBXCapabilityType Maps = new PBXCapabilityType("com.apple.Maps.iOS", false, "MapKit.framework");
         public static readonly PBXCapabilityType PersonalVPN = new PBXCapabilityType("com.apple.VPNLite", true, "NetworkExtension.framework");
         public static readonly PBXCapabilityType PushNotifications = new PBXCapabilityType ("com.apple.Push", true);
@@ -97,6 +99,8 @@ namespace UnityEditor.iOS.Xcode.Custom
                     return DataProtection;
                 case "com.apple.GameCenter":
                     return GameCenter;
+                case "com.apple.GameCenter.iOS":
+                    return GameCenterIOS;
                 case "com.apple.HealthKit":
                     return HealthKit;
                 case "com.apple.HomeKit":
@@ -109,6 +113,8 @@ namespace UnityEditor.iOS.Xcode.Custom
                     return InterAppAudio;
                 case "com.apple.KeychainSharing":
                     return KeychainSharing;
+                case "com.apple.Keychain":
+                    return KeyChainEnabled;
                 case "com.apple.Maps.iOS":
                     return Maps;
                 case "com.apple.VPNLite":

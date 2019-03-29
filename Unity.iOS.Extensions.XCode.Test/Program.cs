@@ -16,7 +16,7 @@ namespace Unity.iOS.Extensions.XCode.Test
             var frameworks = proj.GetUsedFrameworks();
             var filesInBuild = proj.GetFilesIncludedInBuild();
             var buildProperties = proj.GetBuildProperties();
-            //var buildCapabilities = null;
+            var buildCapabilities = proj.GetBuildCapabilities();
 
             Console.ReadKey();
         }
