@@ -7,10 +7,20 @@ This project does just that.
 ## Usage 
 Additional methods are listed bellow, and are rather self explanatory.
 
-* PBXProject::GetUsedFrameworks()
-* PBXProject::GetFilesIncludedInBuild()
-* PBXProject::GetBuildProperties()
-* PBXProject::GetBuildCapabilities()
+~~~
+	//	Usage example
+	PBXProject proj = new PBXProject();
+	proj.ReadFromFile(path);
+
+	var frameworks = proj.GetUsedFrameworks();
+	var filesInBuild = proj.GetFilesIncludedInBuild();
+	var buildProperties = proj.GetBuildProperties();
+	var buildCapabilities = proj.GetBuildCapabilities();
+~~~
+
+To use the extension methods you need to import the namespace:
+
+`using UnityEditor.iOS.Xcode.Extensions;`
 
 ## Notes
 Fork from: https://bitbucket.org/Unity-Technologies/xcodeapi
