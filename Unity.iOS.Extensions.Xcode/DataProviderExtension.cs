@@ -25,16 +25,27 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
     {
     }
 
+    public enum ProjectSchemaType
+    {
+        Debug,
+        Release,
+        ReleaseForRunning,
+        ReleaseForProfiling
+    }
+
     public class ProjectProperty
     {
         public string Key;
         public string Value;
+        public ProjectSchemaType Schema;
 
         public override string ToString()
         {
-            return string.Format("{0} == {1}", Key, Value);
+            return string.Format("[{2}] {0} == {1}", Key, Value, Schema);
         }
     }
+
+
 
     public class ProjectCapability
     {
@@ -154,6 +165,7 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
             foreach (var guid in tmp)
             {
                 var configList = proj.buildConfigs[guid];
+
                 foreach (var entry in configList.GetEntries())
                 {
                     BuildConfigEntryData value = entry.Value;
@@ -162,6 +174,12 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
                         ProjectProperty prop = new ProjectProperty();
                         prop.Key = entry.Key;
                         prop.Value = entry.Value.val[0];
+
+                        foreach (var schemaType in Enum.GetValues(typeof(ProjectSchemaType)))
+                        {
+                            if (configList.name.Equals(schemaType.ToString()))
+                                prop.Schema = (ProjectSchemaType) schemaType;
+                        }
 
                         toReturn.Add(prop);
                     }
