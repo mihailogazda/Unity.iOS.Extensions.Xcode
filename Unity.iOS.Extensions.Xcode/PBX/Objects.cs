@@ -1020,8 +1020,17 @@ namespace UnityEditor.iOS.Xcode.Custom.PBX
                                 foreach (var cap in attr.Value.AsDict().values)
                                 {
                                     var capab = PBXCapabilityType.StringToPBXCapabilityType(cap.Key);
+                                    var capabValue = cap.Value.AsDict();
+                                    bool isEnabled = false;
+                                    
+                                    if (capabValue.Contains("enabled"))
+                                    {
+                                        string enabledString = capabValue.values["enabled"].AsString();
 
-                                    capabilities.Add(new PBXCapabilityType.TargetCapabilityPair(attr.Key, capab));
+                                        isEnabled = string.IsNullOrEmpty(enabledString) ? false : enabledString.Equals("1");
+                                    }
+
+                                    capabilities.Add(new PBXCapabilityType.TargetCapabilityPair(attr.Key, capab, isEnabled));
                                 }
 
                             }

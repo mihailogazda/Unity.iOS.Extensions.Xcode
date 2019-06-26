@@ -59,11 +59,13 @@ namespace UnityEditor.iOS.Xcode.Custom
         {
             public string targetGuid;
             public PBXCapabilityType capability;
+            public bool enabled;
 
-            public TargetCapabilityPair(string guid, PBXCapabilityType type)
+            public TargetCapabilityPair(string guid, PBXCapabilityType type, bool isEnabled = false)
             {
                 targetGuid = guid;
                 capability = type;
+                enabled = isEnabled;
             }
         }
 

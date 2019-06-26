@@ -53,10 +53,11 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
         public string FrameworkName;
         public bool FrameworkRequired;
         public bool EntitlementRequired;
+        public bool Enabled;
 
         public override string ToString()
         {
-            return string.Format("{0} Framework: {1}", Name, string.IsNullOrEmpty(FrameworkName) ? "None" : FrameworkName);
+            return string.Format("{0} Framework: {1} Enabled: {2}", Name, string.IsNullOrEmpty(FrameworkName) ? "None" : FrameworkName, Enabled);
         }
     }
 
@@ -206,6 +207,8 @@ namespace UnityEditor.iOS.Xcode.Extensions.Custom
                     cap.FrameworkName = capability.capability.framework;
                     cap.FrameworkRequired = !capability.capability.optionalFramework;
                     cap.EntitlementRequired = capability.capability.requiresEntitlements;
+                    cap.Enabled = capability.enabled;
+
                     caps.Add(cap);
                 }
 
